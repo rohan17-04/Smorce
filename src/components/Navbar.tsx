@@ -1,0 +1,130 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { useScrollDirection, useScrollY } from '@/lib/hooks';
+import ThemeToggle from './ThemeToggle';
+
+const LINKS = [
+  { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Process', href: '#process' },
+  { label: 'About', href: '#about' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+export default function Navbar() {
+  const scrollY = useScrollY();
+  const direction = useScrollDirection();
+  const scrolled = scrollY > 24;
+  const [open, setOpen] = useState(false);
+
+  const hidden = direction === 'down' && scrollY > 280;
+
+  return (
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{
+        y: hidden ? -100 : 0,
+        opacity: 1,
+      }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className="fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8"
+    >
+      <motion.nav
+        animate={{
+          paddingTop: scrolled ? 10 : 18,
+          paddingBottom: scrolled ? 10 : 18,
+        }}
+        transition={{ duration: 0.5, ease: EASE }}
+        className={`mx-auto mt-3 flex max-w-6xl items-center justify-between rounded-3xl px-4 sm:px-6 transition-colors duration-500 ${
+          scrolled ? 'glass-nav-scrolled shadow-nav' : 'glass-nav'
+        }`}
+      >
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2.5 group">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-bg text-[13px] font-bold tracking-tight transition-transform duration-500 group-hover:scale-105">
+            S
+          </span>
+          <span className="text-[15px] font-bold tracking-[0.02em] text-ink">
+            SMORSE
+          </span>
+        </a>
+
+        {/* Desktop links */}
+        <div className="hidden items-center gap-1 lg:flex">
+          {LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="group relative px-3.5 py-2 text-[13.5px] font-medium text-muted transition-colors duration-300 hover:text-ink"
+            >
+              {l.label}
+              <span className="absolute bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-accent transition-all duration-400 group-hover:w-4" style={{ transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)' }} />
+            </a>
+          ))}
+        </div>
+
+        {/* CTA + mobile toggle */}
+        <div className="flex items-center gap-2">
+          <a
+            href="#contact"
+            className="group btn-primary hidden sm:inline-flex px-5 py-2.5 text-[13px]"
+          >
+            <span className="relative z-10">Book Free Call</span>
+            <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+          </a>
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen(!open)}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink lg:hidden"
+            aria-label="Menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -8, height: 0 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="glass-nav mx-auto mt-2 max-w-6xl overflow-hidden rounded-3xl p-4 shadow-nav lg:hidden"
+          >
+            <div className="flex flex-col">
+              {LINKS.map((l, i) => (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, ease: EASE, delay: 0.04 * i }}
+                  className="border-b border-line/60 px-3 py-3.5 text-[15px] font-medium text-ink last:border-0"
+                >
+                  {l.label}
+                </motion.a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3 text-[14px] font-semibold text-bg"
+              >
+                Book Free Call
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}

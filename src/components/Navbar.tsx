@@ -31,7 +31,11 @@ export default function Navbar() {
         y: hidden ? -100 : 0,
         opacity: 1,
       }}
-      transition={{ duration: 0.6, ease: EASE }}
+      transition={{ 
+        duration: 0.5, 
+        ease: EASE, 
+        opacity: { delay: 1.5, duration: 0.8 } 
+      }}
       className="fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8"
     >
       <motion.nav
@@ -50,7 +54,7 @@ export default function Navbar() {
             S
           </span>
           <span className="text-[15px] font-bold tracking-[0.02em] text-ink">
-            SMORSE
+            SMORCE
           </span>
         </a>
 

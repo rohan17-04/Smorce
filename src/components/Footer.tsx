@@ -30,7 +30,7 @@ export default function Footer() {
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-[13px] font-bold text-[#F2EFE9]">
                 S
               </span>
-              <span className="text-[15px] font-bold tracking-[0.02em] text-[#F2EFE9]">SMORSE</span>
+              <span className="text-[15px] font-bold tracking-[0.02em] text-[#F2EFE9]">SMORCE</span>
             </div>
             <p className="mt-4 max-w-[24ch] text-[14px] leading-[1.7] text-[#8A8C91]">
               Premium software, intelligent automations and high-converting digital products.
@@ -62,7 +62,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/[0.08] pt-8 sm:flex-row sm:items-center">
           <p className="text-[13px] text-[#8A8C91]">
-            © {new Date().getFullYear()} SMORSE. All rights reserved.
+            © {new Date().getFullYear()} SMORCE. All rights reserved.
           </p>
           <div className="flex gap-8">
             <a href="#" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">

@@ -29,11 +29,7 @@ const SERVICES = [
     title: 'SaaS Development',
     desc: 'Multi-tenant platforms engineered for scale, reliability and rapid iteration.',
   },
-  {
-    icon: Globe,
-    title: 'Enterprise Web Apps',
-    desc: 'Complex, data-heavy applications built to perform under real enterprise load.',
-  },
+
   {
     icon: Code2,
     title: 'Website Development',
@@ -49,17 +45,7 @@ const SERVICES = [
     title: 'UI/UX Design',
     desc: 'Interface systems that feel inevitable — clear, calm and deeply usable.',
   },
-  {
-    icon: Cpu,
-    title: 'AI Agents',
-    desc: 'Autonomous agents that reason, act and integrate with your existing stack.',
-  },
 
-  {
-    icon: Layers,
-    title: 'Custom Software',
-    desc: "Bespoke systems built around your exact domain, not someone else's template.",
-  },
 ];
 
 export default function Services() {
@@ -71,7 +57,7 @@ export default function Services() {
         <SectionHeading
           eyebrow="What we do"
           title="A full-stack engineering partner"
-          subtitle="Ten disciplines under one roof. We cover the entire lifecycle — from first prototype to production infrastructure — so you never stitch vendors together."
+          subtitle="Six disciplines under one roof. We cover the entire lifecycle — from first prototype to production infrastructure — so you never stitch vendors together."
         />
 
         <motion.div

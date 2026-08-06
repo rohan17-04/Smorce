@@ -5,10 +5,10 @@ import { cinematicFadeUp, stagger, EASE } from '@/lib/variants';
 import CountUp from './CountUp';
 
 const STATS = [
-  { value: '120+', label: 'Projects shipped' },
-  { value: '40+', label: 'Engineers & designers' },
-  { value: '8', label: 'Years in production' },
-  { value: '99.9%', label: 'Avg. uptime delivered' },
+  { value: '7+', label: 'Projects shipped' },
+  { value: '4', label: 'Developers and designers' },
+  { value: '1+', label: 'Years in production' },
+  { value: '99.8%', label: 'Target uptime' },
 ];
 
 const CLIENTS = [
@@ -30,8 +30,8 @@ export default function About() {
           <div>
             <SectionHeading
               eyebrow="Who we are"
-              title="A senior team that ships like a product company"
-              subtitle="SMORSE is a focused engineering studio. We don't staff juniors on your project and disappear. The people who scope the work are the people who build it."
+              title="A focused team building modern websites and digital products"
+              subtitle="SMORCE is a small web development studio focused on creating fast, modern, and reliable digital experiences. We work closely with every client from planning to launch, ensuring clear communication and attention to detail throughout the project."
             />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,7 @@ export default function About() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
               className="mt-6 text-[16px] leading-[1.7] text-muted"
             >
-              We've spent years inside product teams at fast-growing startups
-              and large enterprises. That experience shapes how we work: small
-              teams, direct communication, and a bias toward shipping software
-              that holds up under real load.
+              Over the past year, we&apos;ve helped startups and local businesses build websites that are clean, responsive, and built for real users. Our team may be small, but we prioritize quality, transparency, and long-term relationships over rushing projects.
             </motion.p>
 
             <motion.div

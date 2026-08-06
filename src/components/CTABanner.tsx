@@ -34,7 +34,7 @@ export default function CTABanner() {
             >
               Have a project in mind?
               <br />
-              Let's make it real.
+              Let&apos;s make it real.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function CTABanner() {
               className="mx-auto mt-5 max-w-md text-[16px] leading-[1.6] text-muted"
             >
               Free 30-minute strategy call. No pressure, no obligation — just a
-              clear conversation about what you're building.
+              clear conversation about what you&apos;re building.
             </motion.p>
             <motion.a
               href="#contact"

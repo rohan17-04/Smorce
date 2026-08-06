@@ -92,8 +92,6 @@ function ProcessRow({
       className="group relative grid grid-cols-1 gap-4 border-t border-line py-10 sm:grid-cols-12 sm:gap-8"
     >
       <div className="relative sm:col-span-2">
-        {/* Dot on the line */}
-        <span className="absolute -left-[3px] top-1 hidden h-2.5 w-2.5 rounded-full border-2 border-alt bg-accent sm:block" />
         <span className="ml-9 text-[14px] font-bold tabular-nums text-accent sm:ml-0">
           {n}
         </span>

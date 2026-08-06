@@ -2,21 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Check, Loader2, ChevronDown } from 'lucide-react';
 import { useInView } from '@/lib/hooks';
-import { supabase } from '@/lib/supabase';
 import { ContactRowProps, CustomSelectProps } from '@/types';
 import { EASE } from '@/lib/variants';
 
 const SERVICES = [
-  'AI Automation',
   'Business Automation',
   'SaaS Development',
-  'Enterprise Web Apps',
   'Website Development',
-  'Mobile Applications',
   'UI/UX Design',
-  'AI Agents',
+  'AI Automation',
   'Cloud Infrastructure',
-  'Custom Software',
+  'Mobile Applications',
 ];
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
@@ -27,26 +23,36 @@ export default function Contact() {
   const [form, setForm] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     service: SERVICES[0],
     message: '',
   });
 
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage(null);
     try {
-      const { error } = await supabase.from('inquiries').insert({
-        name: form.name,
-        email: form.email,
-        company: form.company,
-        service: form.service,
-        message: form.message,
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
       });
-      if (error) throw error;
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to submit');
+      }
+
       setStatus('success');
-      setForm({ name: '', email: '', company: '', service: SERVICES[0], message: '' });
-    } catch {
+      setForm({ name: '', email: '', phone: '', company: '', service: SERVICES[0], message: '' });
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Something went wrong. Please try again.');
       setStatus('error');
     }
   };
@@ -67,7 +73,7 @@ export default function Contact() {
               className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.15em] text-accent"
             >
               <span className="h-1 w-6 rounded-full bg-accent" />
-              Let's talk
+              Let&apos;s talk
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -83,7 +89,7 @@ export default function Contact() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
               className="mt-5 max-w-md text-[16px] leading-[1.65] text-muted"
             >
-              Tell us what you're building. We'll get back within one business day
+              Tell us what you&apos;re building. We&apos;ll get back within one business day
               with a thoughtful response — not a sales pitch.
             </motion.p>
 
@@ -93,9 +99,9 @@ export default function Contact() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
               className="mt-10 space-y-4"
             >
-              <ContactRow label="Email" value="hello@smorse.com" />
+              <ContactRow label="Email" value="smorce366@gmail.com" />
               <ContactRow label="Response time" value="Within 1 business day" />
-              <ContactRow label="Location" value="Remote — global team" />
+              <ContactRow label="Location" value="Remote — India" />
             </motion.div>
           </div>
 
@@ -126,7 +132,7 @@ export default function Contact() {
                   Message received
                 </h3>
                 <p className="mt-2 max-w-xs text-[14px] text-muted">
-                  We'll review your project and reach out within one business day.
+                  We&apos;ll review your project and reach out within one business day.
                 </p>
                 <button
                   onClick={() => setStatus('idle')}
@@ -140,19 +146,19 @@ export default function Contact() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block text-[12.5px] font-medium text-muted">
-                      Name
+                      Name *
                     </label>
                     <input
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       className={inputCls}
-                      placeholder="Jane Doe"
+                      placeholder="Alex Morgan"
                     />
                   </div>
                   <div>
                     <label className="mb-2 block text-[12.5px] font-medium text-muted">
-                      Email
+                      Email *
                     </label>
                     <input
                       required
@@ -160,21 +166,36 @@ export default function Contact() {
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       className={inputCls}
-                      placeholder="jane@company.com"
+                      placeholder="alex@company.com"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="mb-2 block text-[12.5px] font-medium text-muted">
-                    Company
-                  </label>
-                  <input
-                    value={form.company}
-                    onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    className={inputCls}
-                    placeholder="Acme Inc."
-                  />
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-[12.5px] font-medium text-muted">
+                      Phone / WhatsApp *
+                    </label>
+                    <input
+                      required
+                      type="tel"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className={inputCls}
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-[12.5px] font-medium text-muted">
+                      Company
+                    </label>
+                    <input
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      className={inputCls}
+                      placeholder="Company or Brand name"
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -195,17 +216,18 @@ export default function Contact() {
                   </label>
                   <textarea
                     required
+                    minLength={10}
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className={`${inputCls} resize-none`}
-                    placeholder="Tell us about your project, timeline and goals..."
+                    placeholder="Describe your project, key goals, timeline, and requirements..."
                   />
                 </div>
 
                 {status === 'error' && (
                   <p className="text-[13px] text-accent">
-                    Something went wrong. Please try again or email hello@smorse.com.
+                    {errorMessage || 'Something went wrong. Please try again or email smorce366@gmail.com.'}
                   </p>
                 )}
 

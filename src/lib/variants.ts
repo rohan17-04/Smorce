@@ -6,7 +6,7 @@ export const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 /** Fade + lift up. The workhorse reveal. */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 24, willChange: 'transform, opacity' },
   visible: {
     opacity: 1,
     y: 0,
@@ -16,13 +16,13 @@ export const fadeUp: Variants = {
 
 /** Fade in place — for elements that only need opacity. */
 export const fade: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, willChange: 'opacity' },
   visible: { opacity: 1, transition: { duration: 0.8, ease: EASE } },
 };
 
 /** Cinematic 3D fold up with blur (Apple-like reveal). */
 export const cinematicFadeUp: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 40, scale: 0.95, filter: 'blur(8px)', willChange: 'transform, opacity, filter' },
   visible: {
     opacity: 1,
     y: 0,

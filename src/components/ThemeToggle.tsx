@@ -1,12 +1,36 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 export default function ThemeToggle() {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <button
+        suppressHydrationWarning
+        className="relative flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-300 hover:bg-ink/5"
+        aria-label="Toggle theme"
+      >
+        <div className="relative h-5 w-5" />
+      </button>
+    );
+  }
+
   // If system theme is selected, resolve it to dark or light for UI
-  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const isDark =
+    theme === 'dark' ||
+    (theme === 'system' &&
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   const toggleTheme = () => {
     setTheme(isDark ? 'light' : 'dark');
@@ -14,6 +38,7 @@ export default function ThemeToggle() {
 
   return (
     <button
+      suppressHydrationWarning
       onClick={toggleTheme}
       className="relative flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-300 hover:bg-ink/5"
       aria-label="Toggle theme"

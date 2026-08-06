@@ -9,15 +9,14 @@ const scatterProps = [
   { x: 450, y: -50, rotate: 45 },    // E
 ];
 
-function Letter({ letter, i, scrollYProgress }: { letter: string, i: number, scrollYProgress: MotionValue<number> }) {
-  const x = useTransform(scrollYProgress, [0, 0.2], [0, scatterProps[i].x]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, scatterProps[i].y]);
-  const rotate = useTransform(scrollYProgress, [0, 0.2], [0, scatterProps[i].rotate]);
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.3], [1, 0.8, 0]);
+function Letter({ letter, i, scrollYProgress }: { letter: string; i: number; scrollYProgress: MotionValue<number> }) {
+  const x = useTransform(scrollYProgress, [0, 0.25], [0, scatterProps[i].x]);
+  const y = useTransform(scrollYProgress, [0, 0.25], [0, scatterProps[i].y]);
+  const rotate = useTransform(scrollYProgress, [0, 0.25], [0, scatterProps[i].rotate]);
 
   return (
     <motion.span
-      style={{ x, y, rotate, opacity }}
+      style={{ x, y, rotate }}
       className="inline-block origin-center"
     >
       {letter}
@@ -29,12 +28,26 @@ export default function BackgroundText() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden mix-blend-overlay">
-      <div className="flex font-black text-[18vw] leading-none tracking-tighter text-ink/[0.04] dark:text-white/[0.03]">
+    <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden select-none">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94, filter: 'blur(14px)' }}
+        animate={{
+          opacity: [0, 1, 1, 0],
+          scale: [0.94, 1, 1, 1.04],
+          filter: ['blur(14px)', 'blur(0px)', 'blur(0px)', 'blur(16px)'],
+        }}
+        transition={{
+          duration: 3.8,
+          times: [0, 0.22, 0.65, 1],
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="flex font-black text-[22vw] leading-none tracking-[-0.04em] text-[#111111]/[0.22] dark:text-white/[0.22]"
+      >
         {['S', 'M', 'O', 'R', 'C', 'E'].map((letter, i) => (
           <Letter key={i} letter={letter} i={i} scrollYProgress={scrollYProgress} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
+

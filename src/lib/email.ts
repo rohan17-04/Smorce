@@ -1,5 +1,13 @@
 import nodemailer from 'nodemailer';
 
+const log = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') console.log(...args);
+};
+
+const errorLog = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') console.error(...args);
+};
+
 interface EnquiryData {
   id?: string;
   name: string;
@@ -28,17 +36,16 @@ function getTransporter() {
   });
 }
 
-// 1. Password Reset OTP Email
 export async function sendOtpEmail(toEmail: string, otp: string): Promise<{ success: boolean; error?: string }> {
-  console.log('====================================================');
-  console.log(`🔑 [SMORCE OTP System] Code for ${toEmail}: ${otp}`);
-  console.log('====================================================');
+  log('====================================================');
+  log(`🔑 [SMORCE OTP System] Code for ${toEmail}: ${otp}`);
+  log('====================================================');
 
   const transporter = getTransporter();
   const gmailUser = process.env.GMAIL_USER;
 
   if (!transporter || !gmailUser) {
-    console.log('ℹ️ [SMORCE Email] No GMAIL_USER/GMAIL_APP_PASS found in .env. OTP logged to console.');
+    log('ℹ️ [SMORCE Email] No GMAIL_USER/GMAIL_APP_PASS found in .env. OTP logged to console.');
     return { success: true };
   }
 
@@ -73,28 +80,27 @@ export async function sendOtpEmail(toEmail: string, otp: string): Promise<{ succ
       html: htmlContent,
     });
 
-    console.log(`✉️ [SMORCE Email] Real OTP delivered to ${toEmail}`);
+    log(`✉️ [SMORCE Email] Real OTP delivered to ${toEmail}`);
     return { success: true };
   } catch (err: any) {
-    console.error('❌ [SMORCE Email Error]', err?.message || err);
+    errorLog('❌ [SMORCE Email Error]', err?.message || err);
     return { success: true, error: err?.message };
   }
 }
 
-// 2. Customer Assurance Email (Sent to the client within seconds of submitting form)
 export async function sendCustomerAssuranceEmail(
   customerEmail: string,
   customerName: string,
   service: string,
   enquiryId?: string
 ): Promise<{ success: boolean; error?: string }> {
-  console.log(`📨 [SMORCE Customer Assurance] Sending confirmation email to client: ${customerEmail}`);
+  log(`📨 [SMORCE Customer Assurance] Sending confirmation email to client: ${customerEmail}`);
 
   const transporter = getTransporter();
   const gmailUser = process.env.GMAIL_USER;
 
   if (!transporter || !gmailUser) {
-    console.log(`ℹ️ [SMORCE Email] Simulation: Assurance email prepared for ${customerEmail}`);
+    log(`ℹ️ [SMORCE Email] Simulation: Assurance email prepared for ${customerEmail}`);
     return { success: true };
   }
 
@@ -145,24 +151,23 @@ ${gmailUser}
       html: htmlContent,
     });
 
-    console.log(`✅ [SMORCE Email] Assurance email successfully delivered to ${customerEmail} (MessageId: ${info.messageId})`);
+    log(`✅ [SMORCE Email] Assurance email successfully delivered to ${customerEmail} (MessageId: ${info.messageId})`);
     return { success: true };
   } catch (err: any) {
-    console.error('❌ [SMORCE Customer Email Error]', err?.message || err);
+    errorLog('❌ [SMORCE Customer Email Error]', err?.message || err);
     return { success: false, error: err?.message };
   }
 }
 
-// 3. Admin Instant Notification Email (Sent to smorce366@gmail.com)
 export async function sendAdminNotificationEmail(enquiry: EnquiryData): Promise<{ success: boolean; error?: string }> {
   const adminEmail = process.env.GMAIL_USER;
-  console.log(`🔔 [SMORCE Admin Alert] Sending lead notification to admin: ${adminEmail}`);
+  log(`🔔 [SMORCE Admin Alert] Sending lead notification to admin: ${adminEmail}`);
 
   const transporter = getTransporter();
   const gmailUser = process.env.GMAIL_USER;
 
   if (!transporter || !gmailUser) {
-    console.log(`ℹ️ [SMORCE Email] Simulation: Admin alert logged for inquiry from ${enquiry.name} (${enquiry.email})`);
+    log(`ℹ️ [SMORCE Email] Simulation: Admin alert logged for inquiry from ${enquiry.name} (${enquiry.email})`);
     return { success: true };
   }
 
@@ -234,10 +239,10 @@ export async function sendAdminNotificationEmail(enquiry: EnquiryData): Promise<
       html: htmlContent,
     });
 
-    console.log(`✅ [SMORCE Email] Admin notification successfully delivered to ${adminEmail} (MessageId: ${info.messageId})`);
+    log(`✅ [SMORCE Email] Admin notification successfully delivered to ${adminEmail} (MessageId: ${info.messageId})`);
     return { success: true };
   } catch (err: any) {
-    console.error('❌ [Smorce Admin Email Error]', err?.message || err);
+    errorLog('❌ [Smorce Admin Email Error]', err?.message || err);
     return { success: false, error: err?.message };
   }
 }

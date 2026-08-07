@@ -1,4 +1,7 @@
+'use client';
+
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { useScrollDirection, useScrollY } from '@/lib/hooks';
@@ -12,6 +15,7 @@ const LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Legal', href: 'legal' },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -19,6 +23,8 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export default function Navbar() {
   const scrollY = useScrollY();
   const direction = useScrollDirection();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const scrolled = scrollY > 24;
   const [open, setOpen] = useState(false);
 
@@ -63,7 +69,7 @@ export default function Navbar() {
           {LINKS.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={isHome ? l.href : `/${l.href}`}
               className="group relative px-3.5 py-2 text-[13.5px] font-medium text-muted transition-colors duration-300 hover:text-ink"
             >
               {l.label}
@@ -75,7 +81,7 @@ export default function Navbar() {
         {/* CTA + mobile toggle */}
         <div className="flex items-center gap-2">
           <a
-            href="#contact"
+            href={isHome ? '#contact' : '/#contact'}
             className="group btn-primary hidden sm:inline-flex px-5 py-2.5 text-[13px]"
           >
             <span className="relative z-10">Book Free Call</span>
@@ -107,7 +113,7 @@ export default function Navbar() {
               {LINKS.map((l, i) => (
                 <motion.a
                   key={l.href}
-                  href={l.href}
+                  href={isHome ? l.href : `/${l.href}`}
                   onClick={() => setOpen(false)}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -118,7 +124,7 @@ export default function Navbar() {
                 </motion.a>
               ))}
               <a
-                href="#contact"
+                href={isHome ? '#contact' : '/#contact'}
                 onClick={() => setOpen(false)}
                 className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3 text-[14px] font-semibold text-bg"
               >

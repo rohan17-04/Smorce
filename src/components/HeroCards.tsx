@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const hoverSpring = { type: 'spring', stiffness: 400, damping: 25 };
+const hoverSpring = { type: 'spring' as const, stiffness: 400, damping: 25 };
 
 type AnimType = any;
 

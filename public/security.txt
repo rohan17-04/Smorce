@@ -1,0 +1,4 @@
+Contact: mailto:security@smorce.com
+Preferred-Languages: en
+Canonical: https://www.smorce.com/.well-known/security.txt
+Policies: https://www.smorce.com/legal#security

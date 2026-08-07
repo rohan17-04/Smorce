@@ -52,7 +52,7 @@ export async function POST(req: Request) {
 
     emailResults.forEach((result, idx) => {
       if (result.status === 'rejected') {
-        console.error(`❌ [SMORCE Email Dispatch ${idx}] Rejected:`, result.reason);
+        if (process.env.NODE_ENV !== 'production') console.error(`❌ [SMORCE Email Dispatch ${idx}] Rejected:`, result.reason);
       }
     });
 
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues[0]?.message || 'Invalid input data' }, { status: 400 });
     }
-    console.error('Error submitting enquiry:', error);
+    if (process.env.NODE_ENV !== 'production') console.error('Error submitting enquiry:', error);
     return NextResponse.json({ error: 'Failed to process inquiry. Please try again.' }, { status: 500 });
   }
 }

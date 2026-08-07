@@ -1,0 +1,10 @@
+/* TEAM */
+Engineer: SMORCE Development Team
+Site: https://www.smorce.com
+Location: Global
+
+/* SITE */
+Last update: 2026/08
+Standards: HTML5, CSS3, ES2022
+Components: Next.js, React, Tailwind CSS, Framer Motion
+Software: Node.js

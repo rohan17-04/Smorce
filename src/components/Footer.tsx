@@ -1,9 +1,12 @@
-import { ArrowUpRight } from 'lucide-react';
+'use client';
+
+import { ArrowUpRight, Instagram } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const LINKS = {
   Services: ['AI Automation', 'SaaS Development', 'Mobile Apps', 'Cloud Infrastructure'],
   Company: ['About', 'Projects', 'Process', 'Pricing'],
-  Connect: ['Contact', 'Book a call', 'LinkedIn', 'Twitter'],
+  Connect: ['Contact', 'Book a call', 'Instagram'],
 };
 
 const LINK_HREFS: Record<string, string> = {
@@ -17,9 +20,13 @@ const LINK_HREFS: Record<string, string> = {
   Pricing: '#pricing',
   Contact: '#contact',
   'Book a call': '#contact',
+  Instagram: 'https://www.instagram.com/smorce1?igsh=OGlsNWZ1N2x0dzF3',
 };
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   return (
     <footer className="relative bg-[#0F1012] pt-24 pb-10 text-[#F2EFE9]">
       <div className="mx-auto max-w-6xl px-6">
@@ -44,17 +51,26 @@ export default function Footer() {
                 {heading}
               </h4>
               <ul className="mt-5 space-y-3.5">
-                {items.map((l) => (
-                  <li key={l}>
-                    <a
-                      href={LINK_HREFS[l] || '#'}
-                      className="group inline-flex items-center gap-1.5 text-[14px] text-[#B7B8BB] transition-all duration-300 hover:-translate-y-px hover:text-white"
-                    >
-                      {l}
-                      <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
-                    </a>
-                  </li>
-                ))}
+                {items.map((l) => {
+                  const target = LINK_HREFS[l] || '#';
+                  const isExternal = target.startsWith('http');
+                  const href = isExternal ? target : (isHome ? target : `/${target}`);
+                  
+                  return (
+                    <li key={l}>
+                      <a
+                        href={href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className="group inline-flex items-center gap-1.5 text-[14px] text-[#B7B8BB] transition-colors duration-300 hover:text-white"
+                      >
+                        {l === 'Instagram' && <Instagram className="h-4 w-4" />}
+                        {l}
+                        <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -65,13 +81,13 @@ export default function Footer() {
             © {new Date().getFullYear()} SMORCE. All rights reserved.
           </p>
           <div className="flex gap-8">
-            <a href="#" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
+            <a href="/legal#privacy" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
               Privacy
             </a>
-            <a href="#" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
+            <a href="/legal#terms" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
               Terms
             </a>
-            <a href="#" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
+            <a href="/legal#security" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
               Security
             </a>
           </div>

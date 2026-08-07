@@ -1,0 +1,17 @@
+{
+  "name": "SMORCE — AI-Powered Digital Experiences",
+  "short_name": "SMORCE",
+  "description": "Premium software, intelligent automations and high-converting digital products for startups and enterprises.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1012",
+  "theme_color": "#0F1012",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

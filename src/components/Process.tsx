@@ -41,7 +41,7 @@ export default function Process() {
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="process" className="relative bg-alt py-32 sm:py-40">
+    <section id="process" className="relative bg-alt py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="How we work"
@@ -97,7 +97,7 @@ function ProcessRow({
         </span>
       </div>
       <div className="sm:col-span-7">
-        <h3 className="text-[22px] font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
+        <h3 className="text-[20px] lg:text-[22px] font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
           {title}
         </h3>
         <p className="mt-3 max-w-xl text-[15px] leading-[1.65] text-muted">

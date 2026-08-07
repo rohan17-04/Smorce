@@ -21,7 +21,7 @@ export default function Hero() {
       ref={sectionRef}
       id="home"
       style={{ opacity: fade, willChange: 'opacity' }}
-      className="relative flex min-h-screen items-center overflow-hidden pt-32 pb-20"
+      className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20"
     >
       {/* Background grid + glow */}
       <div className="pointer-events-none absolute inset-0 bg-white dark:bg-[#0F1012]" />
@@ -39,7 +39,7 @@ export default function Hero() {
             variants={stagger(0.05, 1.5)}
             initial="hidden"
             animate="visible"
-            className="text-balance text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[3.5rem] lg:text-[4.25rem] flex flex-wrap"
+            className="text-balance text-[2.25rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[3.25rem] lg:text-[4.25rem] flex flex-wrap"
           >
             {headlineWords.map((word, i) => (
               <motion.span
@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.8, delay: 1.8, ease: EASE }}
-            className="mt-6 max-w-xl text-lg text-muted sm:text-xl font-normal leading-relaxed"
+            className="mt-5 lg:mt-6 max-w-xl text-[17px] text-muted sm:text-[19px] lg:text-xl font-normal leading-relaxed"
           >
             We help startups and enterprises build premium software, intelligent
             automations and high-converting digital products.
@@ -66,22 +66,22 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.8, delay: 2.0, ease: EASE }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-8 lg:mt-10 flex flex-wrap items-center gap-3 lg:gap-4"
           >
             <a
               href="#contact"
-              className="group btn-primary"
+              className="group btn-primary px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
             >
               <span className="relative z-10">Book a discovery call</span>
-              <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+              <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 lg:group-hover:translate-x-0.5 lg:group-hover:-translate-y-0.5" />
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 lg:group-hover:translate-x-full" />
             </a>
             <a
               href="#projects"
-              className="group btn-secondary"
+              className="group btn-secondary px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
             >
               <span className="relative z-10">View our work</span>
-              <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 lg:group-hover:translate-x-1" />
             </a>
           </motion.div>
 
@@ -90,19 +90,21 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.2, ease: EASE }}
-            className="mt-14 flex items-center gap-8 border-t border-line/60 pt-8"
+            className="mt-10 lg:mt-14 flex flex-wrap items-center gap-4 lg:gap-8 border-t border-line/60 pt-6 lg:pt-8"
           >
-            <span className="text-[12px] font-medium uppercase tracking-[0.12em] text-muted/70">
+            <span className="text-[11px] lg:text-[12px] font-medium uppercase tracking-[0.12em] text-muted/70 w-full sm:w-auto">
               Trusted by teams at
             </span>
-            {['Nimbus', 'Vantage', 'Orbital', 'Lumen', 'Cortex'].map((b) => (
-              <span
-                key={b}
-                className="text-[15px] font-bold tracking-tight text-ink/35 transition-colors duration-300 hover:text-ink/60"
-              >
-                {b}
-              </span>
-            ))}
+            <div className="flex flex-wrap items-center gap-4 lg:gap-8">
+              {['Nimbus', 'Vantage', 'Orbital', 'Lumen', 'Cortex'].map((b) => (
+                <span
+                  key={b}
+                  className="text-[14px] lg:text-[15px] font-bold tracking-tight text-ink/35 transition-colors duration-300 lg:hover:text-ink/60"
+                >
+                  {b}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
 

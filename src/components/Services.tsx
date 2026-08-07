@@ -52,7 +52,7 @@ export default function Services() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="services" className="relative bg-alt py-32 sm:py-40">
+    <section id="services" className="relative bg-alt py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           eyebrow="What we do"
@@ -65,7 +65,7 @@ export default function Services() {
           variants={stagger(0.06)}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-4xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 lg:mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-[2rem] lg:rounded-4xl border border-line bg-line md:grid-cols-2 lg:grid-cols-3"
         >
           {SERVICES.map((s) => (
             <ServiceCard key={s.title} {...s} />
@@ -89,7 +89,7 @@ function ServiceCard({
     <motion.div
       variants={cinematicFadeUp}
       whileHover={{ y: -6, transition: { duration: 0.5, ease: EASE } }}
-      className="group relative bg-bg p-8 transition-colors duration-500 hover:bg-section hover:shadow-soft"
+      className="group relative bg-bg p-6 lg:p-8 transition-colors duration-500 hover:bg-section hover:shadow-soft"
     >
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-card transition-all duration-500 group-hover:border-accent/30 group-hover:shadow-soft">
         <Icon className="h-5 w-5 text-ink transition-colors duration-500 group-hover:text-accent" />
@@ -135,7 +135,7 @@ export function SectionHeading({
         initial={{ opacity: 0, y: 40, filter: 'blur(10px)', scale: 0.95 }}
         animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 } : {}}
         transition={{ duration: 1.2, ease: EASE, delay: 0.1 }}
-        className="mt-4 text-balance text-[2rem] font-bold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[2.75rem]"
+        className="mt-4 text-balance text-[1.75rem] font-bold leading-[1.1] tracking-[-0.025em] text-ink md:text-[2.25rem] lg:text-[2.75rem]"
       >
         {title}
       </motion.h2>
@@ -144,7 +144,7 @@ export function SectionHeading({
           initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
           animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.2 }}
-          className="mt-5 text-[16px] leading-[1.65] text-muted"
+          className="mt-4 lg:mt-5 text-[15px] lg:text-[16px] leading-[1.65] text-muted"
         >
           {subtitle}
         </motion.p>

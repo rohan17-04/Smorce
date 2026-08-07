@@ -30,27 +30,27 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#0F1012] pt-24 pb-10 text-[#F2EFE9]">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-2 gap-12 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Brand */}
-          <div className="col-span-2 lg:col-span-1">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-[13px] font-bold text-[#F2EFE9]">
                 S
               </span>
               <span className="text-[15px] font-bold tracking-[0.02em] text-[#F2EFE9]">SMORCE</span>
             </div>
-            <p className="mt-4 max-w-[24ch] text-[14px] leading-[1.7] text-[#8A8C91]">
+            <p className="mt-4 lg:mt-5 max-w-[24ch] text-[14px] leading-[1.7] text-[#8A8C91]">
               Premium software, intelligent automations and high-converting digital products.
             </p>
           </div>
 
           {/* Link columns */}
           {Object.entries(LINKS).map(([heading, items]) => (
-            <div key={heading}>
+            <div key={heading} className="flex flex-col items-center sm:items-start text-center sm:text-left">
               <h4 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#F2EFE9]">
                 {heading}
               </h4>
-              <ul className="mt-5 space-y-3.5">
+              <ul className="mt-5 lg:mt-6 space-y-4 lg:space-y-3.5">
                 {items.map((l) => {
                   const target = LINK_HREFS[l] || '#';
                   const isExternal = target.startsWith('http');
@@ -76,11 +76,11 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/[0.08] pt-8 sm:flex-row sm:items-center">
-          <p className="text-[13px] text-[#8A8C91]">
+        <div className="mt-16 lg:mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/[0.08] pt-8 sm:flex-row">
+          <p className="text-[13px] text-[#8A8C91] text-center sm:text-left">
             © {new Date().getFullYear()} SMORCE. All rights reserved.
           </p>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
             <a href="/legal#privacy" className="text-[13px] text-[#8A8C91] transition-colors hover:text-[#F2EFE9]">
               Privacy
             </a>

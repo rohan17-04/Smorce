@@ -203,7 +203,7 @@ export default function HeroCards() {
           initial={{ opacity: 0, y: 300, x: -350, scale: 0.25, rotate: -30 }}
           delay={1.7}
           baseZ={40}
-          className="left-8 lg:left-0 bottom-16 lg:bottom-24 w-48 md:w-56 hidden sm:block"
+          className="left-8 lg:left-0 bottom-16 lg:bottom-24 w-48 md:w-56 hidden lg:block"
           innerClassName="overflow-hidden rounded-xl border border-line bg-white/70 backdrop-blur-md shadow-xl dark:bg-black/40 dark:border-white/10"
           duration={11}
           floatAnim={{ x: [10, 0, -10, 0, 10], y: [0, 10, 0, -10, 0], rotate: [8, 4, 8, 12, 8] }}
@@ -223,7 +223,7 @@ export default function HeroCards() {
           initial={{ opacity: 0, scale: 0, x: 200, y: 150, rotate: -60 }}
           delay={1.9}
           baseZ={50}
-          className="top-1/2 -translate-y-1/2 right-1/4 w-36"
+          className="top-1/2 -translate-y-1/2 right-1/4 w-36 hidden lg:block"
           innerClassName="overflow-hidden rounded-2xl border border-line bg-bg shadow-lg flex flex-col items-center p-4"
           duration={9}
           floatAnim={{ x: [0, 12, 0, -12, 0], y: [-12, 0, 12, 0, -12], rotate: [-10, -5, -10, -15, -10] }}

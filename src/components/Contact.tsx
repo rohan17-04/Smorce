@@ -58,10 +58,10 @@ export default function Contact() {
   };
 
   const inputCls =
-    'w-full rounded-2xl border border-line bg-card px-4 py-3.5 text-[14.5px] text-ink placeholder:text-muted/50 transition-colors duration-300 focus:border-ink/30 focus:outline-none';
+    'w-full rounded-xl lg:rounded-2xl border border-line bg-card px-4 py-4 lg:py-3.5 text-[15px] lg:text-[14.5px] text-ink placeholder:text-muted/50 transition-colors duration-300 focus:border-ink/30 focus:outline-none';
 
   return (
-    <section id="contact" className="relative bg-bg py-32 sm:py-40">
+    <section id="contact" className="relative bg-bg py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Left: invitation */}
@@ -79,7 +79,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-              className="mt-4 text-balance text-[2rem] font-bold leading-[1.1] tracking-[-0.025em] text-ink sm:text-[2.75rem]"
+              className="mt-4 text-balance text-[2rem] font-bold leading-[1.1] tracking-[-0.025em] text-ink lg:text-[2.75rem]"
             >
               Book a free strategy call
             </motion.h2>
@@ -111,7 +111,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-            className="glass-card premium-shadow rounded-4xl p-8 sm:p-10"
+            className="glass-card premium-shadow rounded-[2rem] lg:rounded-4xl p-6 sm:p-8 lg:p-10"
           >
             {status === 'success' ? (
               <motion.div
@@ -234,7 +234,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="group btn-primary w-full disabled:opacity-60 py-4"
+                  className="group btn-primary w-full disabled:opacity-60 py-4 lg:py-4"
                 >
                   {status === 'loading' ? (
                     <>

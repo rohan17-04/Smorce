@@ -61,7 +61,7 @@ export default function Pricing() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="pricing" className="relative bg-alt py-32 sm:py-40">
+    <section id="pricing" className="relative bg-alt py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
           center
@@ -111,7 +111,7 @@ function PlanCard({
     <motion.div
       variants={cinematicFadeUp}
       whileHover={{ y: -6, transition: { duration: 0.5, ease: EASE } }}
-      className={`relative flex flex-col rounded-4xl border p-8 transition-shadow duration-500 ${
+      className={`relative flex flex-col rounded-3xl lg:rounded-4xl border p-6 lg:p-8 transition-shadow duration-500 ${
         highlighted
           ? 'border-accent/40 bg-card text-ink shadow-soft'
           : 'border-line bg-card text-ink hover:shadow-soft'

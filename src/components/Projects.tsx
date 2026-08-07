@@ -45,7 +45,7 @@ export default function Projects() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="projects" className="relative bg-bg py-32 sm:py-40">
+    <section id="projects" className="relative bg-bg py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading
@@ -67,7 +67,7 @@ export default function Projects() {
           variants={stagger(0.12)}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2"
+          className="mt-12 lg:mt-16 grid grid-cols-1 gap-5 lg:gap-6 md:grid-cols-2"
         >
           {PROJECTS.map((p) => (
             <ProjectCard key={p.name} {...p} />
@@ -90,10 +90,10 @@ const ProjectCard = React.memo(function ProjectCard({
     <motion.article
       variants={cinematicFadeUp}
       whileHover={{ y: -6, transition: { duration: 0.5, ease: EASE } }}
-      className="group relative overflow-hidden rounded-4xl border border-line bg-section p-2 transition-shadow duration-500 hover:shadow-soft"
+      className="group relative overflow-hidden rounded-[2rem] lg:rounded-4xl border border-line bg-section p-2 transition-shadow duration-500 hover:shadow-soft"
     >
       {/* Visual top */}
-      <div className={`relative h-52 overflow-hidden rounded-3xl bg-gradient-to-br ${gradient}`}>
+      <div className={`relative h-48 lg:h-52 overflow-hidden rounded-[1.5rem] lg:rounded-3xl bg-gradient-to-br ${gradient}`}>
         <div className="absolute inset-0 grid-pattern opacity-40" />
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <span
@@ -108,7 +108,7 @@ const ProjectCard = React.memo(function ProjectCard({
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-5 lg:p-6">
         <div className="flex items-center justify-between">
           <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-accent">
             {category}

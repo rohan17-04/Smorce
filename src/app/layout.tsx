@@ -61,7 +61,7 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body>
-        <ThemeProvider defaultTheme="system" storageKey="smorce-ui-theme">
+        <ThemeProvider defaultTheme="light" storageKey="smorce-ui-theme">
           {children}
         </ThemeProvider>
         <Analytics />

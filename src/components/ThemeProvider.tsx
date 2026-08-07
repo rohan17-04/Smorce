@@ -24,7 +24,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'system',
+  defaultTheme = 'light',
   storageKey = 'smorce-ui-theme',
   ...props
 }: ThemeProviderProps) {
@@ -34,20 +34,12 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement;
-
     root.classList.remove('light', 'dark');
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
+    
+    // Always use the explicit theme (which defaults to light)
+    // Removed system matching per requirements
+    const effectiveTheme = theme === 'system' ? 'light' : theme;
+    root.classList.add(effectiveTheme);
   }, [theme]);
 
   const value = {

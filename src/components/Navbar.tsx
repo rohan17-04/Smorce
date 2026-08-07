@@ -90,7 +90,7 @@ export default function Navbar() {
         <div className="flex items-center gap-1.5 sm:gap-2">
           <a
             href={isHome ? '#contact' : '/#contact'}
-            className="group btn-primary hidden xs:inline-flex lg:inline-flex px-3 py-1.5 text-[11px] lg:px-5 lg:py-2.5 lg:text-[13px]"
+            className="group btn-primary hidden sm:inline-flex lg:inline-flex px-3 py-1.5 text-[11px] lg:px-5 lg:py-2.5 lg:text-[13px]"
           >
             <span className="relative z-10">Book Call</span>
             <ArrowUpRight className="relative z-10 h-3 w-3 lg:h-3.5 lg:w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

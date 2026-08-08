@@ -61,17 +61,13 @@ export default function Services() {
           subtitle="Six disciplines under one roof. We cover the entire lifecycle — from first prototype to production infrastructure — so you never stitch vendors together."
         />
 
-        <motion.div
-          ref={ref}
-          variants={stagger(0.06)}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
+        <div
           className="mt-12 lg:mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-[2rem] lg:rounded-4xl border border-line bg-line md:grid-cols-2 lg:grid-cols-3"
         >
-          {SERVICES.map((s) => (
-            <ServiceCard key={s.title} {...s} />
+          {SERVICES.map((s, i) => (
+            <ServiceCard key={s.title} {...s} index={i} />
           ))}
-        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,15 +94,21 @@ function ServiceCard({
   icon: Icon,
   title,
   desc,
+  index,
 }: {
   icon: typeof Bot;
   title: string;
   desc: string;
+  index: number;
 }) {
   return (
     <motion.div
-      variants={cinematicFadeUp}
+      initial={{ opacity: 0, rotateX: -60, y: 50, filter: 'blur(5px)' }}
+      whileInView={{ opacity: 1, rotateX: 0, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.7, ease: EASE }}
       whileHover={{ y: -6, transition: { duration: 0.5, ease: EASE } }}
+      style={{ perspective: 1000 }}
       className="group relative bg-bg p-6 lg:p-8 transition-colors duration-500 hover:bg-section hover:shadow-soft"
     >
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-card transition-all duration-500 group-hover:border-accent/30 group-hover:shadow-soft">

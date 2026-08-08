@@ -113,11 +113,15 @@ const ProjectCard = React.memo(function ProjectCard({
       <div className={`relative h-48 lg:h-52 overflow-hidden rounded-[1.5rem] lg:rounded-3xl bg-gradient-to-br ${gradient}`}>
         <div className="absolute inset-0 grid-pattern opacity-40" />
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-          <span
+          <motion.span
+            initial={{ opacity: 0, y: 20, filter: 'blur(8px)', scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+            viewport={{ once: true, margin: "-20px" }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
             className="text-[28px] font-bold tracking-tight text-[#171717]/30 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] group-hover:text-[#171717]/40"
           >
             {name}
-          </span>
+          </motion.span>
         </div>
         <div className="absolute right-5 top-5 rounded-full bg-white/40 px-3 py-1 text-[11px] font-semibold text-[#171717] backdrop-blur-md">
           {metric}

@@ -73,6 +73,23 @@ export default function Projects() {
             <ProjectCard key={p.name} {...p} />
           ))}
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mt-12 lg:mt-16 flex justify-center w-full"
+        >
+          <a
+            href="#contact"
+            className="group btn-primary px-8 py-4 text-[14px] lg:text-[15px]"
+          >
+            <span className="relative z-10">Book Now</span>
+            <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

@@ -131,14 +131,6 @@ export default function Navbar() {
                   {l.label}
                 </motion.a>
               ))}
-              <a
-                href={isHome ? '#contact' : '/#contact'}
-                onClick={() => setOpen(false)}
-                className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3 text-[14px] font-semibold text-bg"
-              >
-                Book Free Call
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
             </div>
           </motion.div>
         )}

@@ -78,7 +78,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mt-12 lg:mt-16 flex justify-center w-full"
+          className="mt-12 lg:mt-16 flex justify-center w-full lg:hidden"
         >
           <a
             href="#contact"

@@ -58,7 +58,7 @@ export default function Navbar() {
           paddingBottom: isMobile ? (scrolled ? 8 : 12) : (scrolled ? 10 : 18),
         }}
         transition={{ duration: 0.5, ease: EASE }}
-        className={`mx-auto mt-3 flex max-w-6xl items-center justify-between rounded-3xl px-4 sm:px-6 transition-colors duration-500 ${
+        className={`mx-auto mt-2 sm:mt-3 flex max-w-6xl items-center justify-between rounded-3xl px-3 sm:px-6 transition-colors duration-500 ${
           scrolled ? 'glass-nav-scrolled shadow-nav' : 'glass-nav'
         }`}
       >
@@ -90,7 +90,7 @@ export default function Navbar() {
         <div className="flex items-center gap-1.5 sm:gap-2">
           <a
             href={isHome ? '#contact' : '/#contact'}
-            className="group btn-primary hidden sm:inline-flex lg:inline-flex px-3 py-1.5 text-[11px] lg:px-5 lg:py-2.5 lg:text-[13px]"
+            className="group btn-primary hidden md:inline-flex px-3 py-1.5 text-[11px] lg:px-5 lg:py-2.5 lg:text-[13px]"
           >
             <span className="relative z-10">Book Call</span>
             <ArrowUpRight className="relative z-10 h-3 w-3 lg:h-3.5 lg:w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

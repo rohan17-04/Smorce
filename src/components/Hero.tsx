@@ -31,7 +31,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-accent/[0.04] blur-[120px] dark:bg-accent/[0.08]" />
       <div className="pointer-events-none absolute top-1/3 -right-20 h-[400px] w-[400px] rounded-full bg-accent/[0.03] blur-[100px] dark:bg-accent/[0.05]" />
 
-      <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-12 lg:gap-8">
+      <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-8">
         {/* Left: copy */}
         <div className="lg:col-span-7">
 
@@ -39,7 +39,7 @@ export default function Hero() {
             variants={stagger(0.05, 1.5)}
             initial="hidden"
             animate="visible"
-            className="text-balance text-[2.25rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[3.25rem] lg:text-[4.25rem] flex flex-wrap"
+            className="text-balance text-[2.15rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[3.25rem] lg:text-[4.25rem] flex flex-wrap"
           >
             {headlineWords.map((word, i) => (
               <motion.span
@@ -56,7 +56,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.8, delay: 1.8, ease: EASE }}
-            className="mt-5 lg:mt-6 max-w-xl text-[17px] text-muted sm:text-[19px] lg:text-xl font-normal leading-relaxed"
+            className="mt-5 lg:mt-6 max-w-xl text-[16px] text-muted sm:text-[19px] lg:text-xl font-normal leading-relaxed"
           >
             We help startups and enterprises build premium software, intelligent
             automations and high-converting digital products.
@@ -66,11 +66,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.8, delay: 2.0, ease: EASE }}
-            className="mt-8 lg:mt-10 flex flex-wrap items-center gap-3 lg:gap-4"
+            className="mt-8 lg:mt-10 flex flex-col sm:flex-row items-center gap-3 lg:gap-4"
           >
             <a
               href="#contact"
-              className="group btn-primary px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
+              className="group btn-primary w-full sm:w-auto px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
             >
               <span className="relative z-10">Book a discovery call</span>
               <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 lg:group-hover:translate-x-0.5 lg:group-hover:-translate-y-0.5" />
@@ -78,7 +78,7 @@ export default function Hero() {
             </a>
             <a
               href="#projects"
-              className="group btn-secondary px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
+              className="group btn-secondary w-full sm:w-auto px-6 py-3.5 lg:px-8 lg:py-4 text-[14px] lg:text-[15px]"
             >
               <span className="relative z-10">View our work</span>
               <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 lg:group-hover:translate-x-1" />

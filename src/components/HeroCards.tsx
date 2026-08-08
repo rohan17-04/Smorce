@@ -60,7 +60,7 @@ function FloatCard({
       initial={initial}
       animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }}
       transition={{ duration: 1.2, ease: EASE, delay }}
-      className={`absolute ${expandableId ? 'cursor-pointer' : ''} ${className}`}
+      className={`relative lg:absolute ${expandableId ? 'cursor-pointer' : ''} ${className}`}
       style={{ zIndex: isHovered ? 100 : baseZ }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -137,7 +137,7 @@ export default function HeroCards() {
 
   return (
     <>
-      <div className="relative w-full h-[500px] lg:h-[700px] flex items-center justify-center pointer-events-auto">
+      <div className="relative w-full h-auto py-12 lg:py-0 lg:h-[700px] flex flex-col lg:block items-center justify-center pointer-events-auto gap-8 lg:gap-0">
         
         {/* Card 1: Gymcore (Image) */}
         <FloatCard
@@ -147,7 +147,7 @@ export default function HeroCards() {
           initial={{ opacity: 0, y: -250, x: 450, scale: 0.25, rotate: 40 }}
           delay={1.6}
           baseZ={10}
-          className="right-0 lg:-right-10 top-4 lg:top-10 w-60 md:w-72 hidden sm:block"
+          className="right-0 lg:-right-10 top-4 lg:top-10 w-[280px] md:w-72"
           innerClassName="overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-[#0A0A0A]"
           duration={12}
           floatAnim={{ x: [0, 15, 0, -15, 0], y: [-15, 0, 15, 0, -15], rotate: [-4, 0, 4, 0, -4] }}
@@ -178,7 +178,7 @@ export default function HeroCards() {
           initial={{ opacity: 0, y: 350, x: 350, scale: 0.25, rotate: 30 }}
           delay={1.8}
           baseZ={30}
-          className="bottom-16 lg:bottom-24 right-4 lg:-right-4 w-56 md:w-64"
+          className="bottom-16 lg:bottom-24 right-4 lg:-right-4 w-56 md:w-64 hidden lg:block"
           innerClassName="overflow-hidden rounded-xl border border-white/10 bg-[#16181D] shadow-2xl"
           duration={10}
           floatAnim={{ x: [-10, 0, 10, 0, -10], y: [0, -15, 0, 15, 0], rotate: [-2, 2, -2, -6, -2] }}

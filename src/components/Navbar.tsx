@@ -88,14 +88,16 @@ export default function Navbar() {
 
         {/* CTA + mobile toggle */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <a
-            href={isHome ? '#contact' : '/#contact'}
-            className="group btn-primary hidden lg:inline-flex lg:px-5 lg:py-2.5 lg:text-[13px]"
-          >
-            <span className="relative z-10">Book Call</span>
-            <ArrowUpRight className="relative z-10 h-3 w-3 lg:h-3.5 lg:w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
-          </a>
+          <div className="hidden lg:block">
+            <a
+              href={isHome ? '#contact' : '/#contact'}
+              className="group btn-primary lg:px-5 lg:py-2.5 lg:text-[13px]"
+            >
+              <span className="relative z-10">Book Call</span>
+              <ArrowUpRight className="relative z-10 h-3 w-3 lg:h-3.5 lg:w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+            </a>
+          </div>
           <ThemeToggle />
           <button
             onClick={() => setOpen(!open)}

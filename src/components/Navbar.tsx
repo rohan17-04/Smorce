@@ -124,7 +124,17 @@ export default function Navbar() {
                 <motion.a
                   key={l.href}
                   href={isHome ? l.href : `/${l.href}`}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    if (isHome && l.href.startsWith('#')) {
+                      e.preventDefault();
+                      const targetId = l.href.substring(1);
+                      const elem = document.getElementById(targetId);
+                      if (elem) {
+                        elem.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                    setOpen(false);
+                  }}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, ease: EASE, delay: 0.04 * i }}

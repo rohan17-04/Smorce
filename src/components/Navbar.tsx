@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { useScrollDirection, useScrollY } from '@/lib/hooks';
@@ -75,14 +76,14 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden items-center gap-1 lg:flex">
           {LINKS.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={isHome ? l.href : `/${l.href}`}
               className="group relative px-3.5 py-2 text-[13.5px] font-medium text-muted transition-colors duration-300 hover:text-ink"
             >
               {l.label}
               <span className="absolute bottom-1 left-1/2 h-px w-0 -translate-x-1/2 bg-accent transition-all duration-400 group-hover:w-4" style={{ transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)' }} />
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -121,27 +122,22 @@ export default function Navbar() {
           >
             <div className="flex flex-col">
               {LINKS.map((l, i) => (
-                <motion.a
+                <Link
                   key={l.href}
                   href={isHome ? l.href : `/${l.href}`}
-                  onClick={(e) => {
-                    if (isHome && l.href.startsWith('#')) {
-                      e.preventDefault();
-                      const targetId = l.href.substring(1);
-                      const elem = document.getElementById(targetId);
-                      if (elem) {
-                        elem.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }
-                    setOpen(false);
+                  onClick={() => {
+                    setTimeout(() => setOpen(false), 200);
                   }}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, ease: EASE, delay: 0.04 * i }}
-                  className="border-b border-line/60 px-3 py-3.5 text-[15px] font-medium text-ink last:border-0"
+                  className="border-b border-line/60 px-3 py-3.5 text-[15px] font-medium text-ink last:border-0 block"
                 >
-                  {l.label}
-                </motion.a>
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, ease: EASE, delay: 0.04 * i }}
+                  >
+                    {l.label}
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </motion.div>

@@ -122,11 +122,26 @@ export default function Navbar() {
           >
             <div className="flex flex-col">
               {LINKS.map((l, i) => (
-                <Link
+                <a
                   key={l.href}
                   href={isHome ? l.href : `/${l.href}`}
-                  onClick={() => {
-                    setTimeout(() => setOpen(false), 200);
+                  onClick={(e) => {
+                    if (isHome && l.href.startsWith('#')) {
+                      e.preventDefault();
+                      const targetId = l.href.substring(1);
+                      const elem = document.getElementById(targetId);
+                      if (elem) {
+                        const headerOffset = 80;
+                        const elementPosition = elem.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth'
+                        });
+                        window.history.pushState(null, '', l.href);
+                      }
+                    }
+                    setTimeout(() => setOpen(false), 150);
                   }}
                   className="border-b border-line/60 px-3 py-3.5 text-[15px] font-medium text-ink last:border-0 block"
                 >
@@ -137,7 +152,7 @@ export default function Navbar() {
                   >
                     {l.label}
                   </motion.div>
-                </Link>
+                </a>
               ))}
             </div>
           </motion.div>

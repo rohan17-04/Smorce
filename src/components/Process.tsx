@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView as useFramerInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useInView } from '@/lib/hooks';
@@ -104,13 +104,17 @@ function ProcessRow({
   desc: string;
   detail: string;
 }) {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const isCenterInView = useFramerInView(rowRef, { margin: "-40% 0px -40% 0px" });
+
   return (
     <motion.div
+      ref={rowRef}
       variants={cinematicFadeUp}
       className="group relative grid grid-cols-1 gap-4 border-t border-line py-10 sm:grid-cols-12 sm:gap-8"
     >
       <div className="relative sm:col-span-2">
-        <span className="ml-9 text-[14px] font-bold tabular-nums text-accent sm:ml-0">
+        <span className={`ml-9 text-[14px] font-bold tabular-nums transition-colors duration-500 sm:ml-0 sm:text-accent ${isCenterInView ? 'text-accent' : 'text-ink'}`}>
           {n}
         </span>
       </div>

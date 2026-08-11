@@ -18,7 +18,7 @@ const SERVICES = [
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function Contact() {
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({ threshold: 0, rootMargin: '0px 0px 200px 0px' });
   const [status, setStatus] = useState<Status>('idle');
   const [form, setForm] = useState({
     name: '',
@@ -61,7 +61,7 @@ export default function Contact() {
     'w-full rounded-xl lg:rounded-2xl border border-line bg-card px-4 py-4 lg:py-3.5 text-[15px] lg:text-[14.5px] text-ink placeholder:text-muted/50 transition-colors duration-300 focus:border-ink/30 focus:outline-none';
 
   return (
-    <section id="contact" className="relative bg-bg py-24 md:py-32 lg:py-40">
+    <section id="contact" ref={ref} className="relative bg-bg py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Left: invitation */}
@@ -107,7 +107,6 @@ export default function Contact() {
 
           {/* Right: form */}
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}

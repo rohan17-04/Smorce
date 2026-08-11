@@ -20,7 +20,8 @@ const CLIENTS = [
 ];
 
 export default function About() {
-  const { ref, inView } = useInView();
+  const { ref: textRef, inView: textInView } = useInView({ threshold: 0.1 });
+  const { ref: bottomRef, inView: bottomInView } = useInView({ threshold: 0.1 });
 
   return (
     <section id="about" className="relative bg-bg py-32 sm:py-40">
@@ -34,18 +35,20 @@ export default function About() {
               subtitle="SMORCE is a small web development studio focused on creating fast, modern, and reliable digital experiences. We work closely with every client from planning to launch, ensuring clear communication and attention to detail throughout the project."
             />
             <motion.p
+              ref={textRef}
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
+              animate={textInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: EASE }}
               className="mt-6 text-[16px] leading-[1.7] text-muted"
             >
               Over the past year, we&apos;ve helped startups and local businesses build websites that are clean, responsive, and built for real users. Our team may be small, but we prioritize quality, transparency, and long-term relationships over rushing projects.
             </motion.p>
 
             <motion.div
+              ref={bottomRef}
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.4 }}
+              animate={bottomInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: EASE }}
               className="mt-10"
             >
               <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted/70">
@@ -54,7 +57,7 @@ export default function About() {
               <motion.div
                 variants={stagger(0.06)}
                 initial="hidden"
-                animate={inView ? 'visible' : 'hidden'}
+                animate={bottomInView ? 'visible' : 'hidden'}
                 className="flex flex-wrap gap-2"
               >
                 {CLIENTS.map((c) => (
@@ -73,10 +76,9 @@ export default function About() {
 
           {/* Right: stats grid */}
           <motion.div
-            ref={ref}
             variants={stagger(0.1, 0.2)}
             initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
+            animate={bottomInView ? 'visible' : 'hidden'}
             className="grid grid-cols-2 gap-px overflow-hidden rounded-4xl border border-line bg-line"
           >
             {STATS.map((s) => (

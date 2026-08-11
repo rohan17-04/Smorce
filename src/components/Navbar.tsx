@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -29,6 +29,42 @@ export default function Navbar() {
   const scrolled = scrollY > 24;
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (open && headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    let initialScrollY = window.scrollY;
+    let scrollTimeout: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      // Only close if user scrolled more than 50px (prevents accidental closing on touch)
+      if (open && Math.abs(window.scrollY - initialScrollY) > 50) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    if (open) {
+      initialScrollY = window.scrollY;
+      scrollTimeout = setTimeout(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+      }, 100);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
+  }, [open]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -39,8 +75,35 @@ export default function Navbar() {
 
   const hidden = direction === 'down' && scrollY > 280;
 
+  const handleMobileNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (isHome && href.startsWith('#')) {
+      e.preventDefault();
+      // 1. Close menu immediately
+      setOpen(false);
+      
+      // 2. Wait for the exit animation to clear the DOM to prevent scroll aborts
+      setTimeout(() => {
+        const targetId = href.substring(1);
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          const headerOffset = 80;
+          const elementPosition = elem.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          window.history.pushState(null, '', href);
+        }
+      }, 350);
+    } else {
+      setOpen(false);
+    }
+  };
+
   return (
     <motion.header
+      ref={headerRef}
       initial={{ y: -100, opacity: 0 }}
       animate={{
         y: hidden ? -100 : 0,
@@ -122,27 +185,10 @@ export default function Navbar() {
           >
             <div className="flex flex-col">
               {LINKS.map((l, i) => (
-                <a
+                <Link
                   key={l.href}
                   href={isHome ? l.href : `/${l.href}`}
-                  onClick={(e) => {
-                    if (isHome && l.href.startsWith('#')) {
-                      e.preventDefault();
-                      const targetId = l.href.substring(1);
-                      const elem = document.getElementById(targetId);
-                      if (elem) {
-                        const headerOffset = 80;
-                        const elementPosition = elem.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-                        window.scrollTo({
-                          top: offsetPosition,
-                          behavior: 'smooth'
-                        });
-                        window.history.pushState(null, '', l.href);
-                      }
-                    }
-                    setTimeout(() => setOpen(false), 150);
-                  }}
+                  onClick={(e) => handleMobileNav(e, l.href)}
                   className="border-b border-line/60 px-3 py-3.5 text-[15px] font-medium text-ink last:border-0 block"
                 >
                   <motion.div
@@ -152,7 +198,7 @@ export default function Navbar() {
                   >
                     {l.label}
                   </motion.div>
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

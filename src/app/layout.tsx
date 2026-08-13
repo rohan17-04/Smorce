@@ -12,14 +12,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.smorce.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://smorce.vercel.app'),
   title: {
     default: 'SMORCE — AI-Powered Digital Experiences That Scale Businesses',
     template: '%s | SMORCE',
   },
   description: 'SMORCE builds premium software, intelligent automations and high-converting digital products for startups and enterprises.',
   keywords: ['Software Development', 'AI Automation', 'SaaS', 'Digital Agency', 'React', 'Next.js'],
-  authors: [{ name: 'SMORCE', url: 'https://www.smorce.com' }],
+  authors: [{ name: 'SMORCE', url: 'https://smorce.vercel.app' }],
   creator: 'SMORCE',
   publisher: 'SMORCE',
   alternates: {
